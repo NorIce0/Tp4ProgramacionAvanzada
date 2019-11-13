@@ -17,6 +17,10 @@ public class MatrizSimetrica {
 			vec[i] = 0;
 	}
 	}
+	
+	public int getValor(int f, int c) {
+		return this.vec[getIndice(f, c)];
+	}
 
 	public void cargarMatriz(ArrayList<Integer> elementos) {
 		for(int i = 0; i < cantidadDeElementos; i++ ) {
