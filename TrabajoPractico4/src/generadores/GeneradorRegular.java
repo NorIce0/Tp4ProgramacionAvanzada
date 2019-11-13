@@ -2,43 +2,64 @@ package generadores;
 
 import java.io.IOException;
 
-import grafos.Grafo;
 import utilitarios.Archivo;
+import grafos.Grafo;
 
 public class GeneradorRegular extends Generador{
 
-	int grado;
-	public GeneradorRegular(int cantidadDeNodos, int grado) {
+	public GeneradorRegular(int cantidadDeNodos,int grado) {
 		super(cantidadDeNodos);
 		this.setGradoMin(grado);
 		this.setGradoMax(grado);
-		this.grado = grado;
 	}
 
 	@Override
-	public Grafo generar(String path) {
-		int cantidadDeAristas = 0;
-		for(int i = 1; i < grado; i++) {
-			int j ;
-			for(j = 0; j < getCantidadDeNodos() - i; j++) {
-				matriz.setValor(j + i, j, 1);
-				cantidadDeAristas++;
-			}
-			matriz.setValor(i - 1, j, 1);
+	public Grafo generar() throws IOException {
+		if ((gradoMax % 2 != 0 && cantidadDeNodos % 2 != 0) || cantidadDeNodos <= gradoMax) {
+			return null;
 		}
-		grafoResultante = new Grafo(getCantidadDeNodos(),  cantidadDeAristas, this.matriz);
-		grafoResultante.setPorcentajeAdyacencia((cantidadDeAristas/(getCantidadDeNodos()*(getCantidadDeNodos()-1)/2))*100);
-		grafoResultante.setGradoMaximo(getGradoMax());
-		grafoResultante.setGradoMinimo(getGradoMin());
 		
-		Archivo archivo = new Archivo(path);
-		try {
-			archivo.guardarGrafo(grafoResultante);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("No se puede abrir el archivo.");
+		int listagrados[] = new int[cantidadDeNodos], grado = gradoMax;
+		int mitad = cantidadDeNodos / 2;
+		
+		if (grado % 2 == 1) {
+			for (int i = 0; i < mitad; i++) {
+				this.matriz.setValor(i, mitad + i, 1);
+				cantArista++;
+				listagrados[i]++;
+				listagrados[mitad + i]++;
+			}
+			grado -= 1;
 		}
-		return grafoResultante;
+		
+		// circulo
+		if (grado > 1) { 
+			int salteo = 1;
+			while (grado <= this.gradoMax && grado>0) {
+				for (int i = 0; i < cantidadDeNodos; i++) {
+					this.matriz.setValor(i, (i + salteo) % cantidadDeNodos, 1);
+					cantArista++;
+					listagrados[i]++;
+					listagrados[(i+salteo) % cantidadDeNodos]++;	
+				}
+				salteo++;
+				grado-=2; 
+			}
+		}
+		
+			grafoResultante = new Grafo(getCantidadDeNodos(),  cantArista, this.matriz);
+			grafoResultante.setPorcentajeAdyacencia((int)((float)cantArista/(cantidadDeNodos*(cantidadDeNodos-1)/2)*100));
+			grafoResultante.setGradoMaximo(this.getGradoMax());
+			grafoResultante.setGradoMinimo(this.getGradoMin());
+			Archivo archivo = new Archivo("grafo.in");
+			try {
+				archivo.guardarGrafo(grafoResultante);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("No se puede abrir el archivo.");
+			}
+			return grafoResultante;
+
+		}
 	}
 
-}

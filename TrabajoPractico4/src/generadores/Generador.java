@@ -8,12 +8,12 @@ import grafos.MatrizSimetrica;
 
 public abstract class  Generador  {
 	
-	private int cantidadDeNodos;
+	protected int cantidadDeNodos;
 	private int gradoMin;
-	private int gradoMax;
-	private int cantArista;
+	protected int gradoMax;
+	protected int cantArista;
 	private double probabilidad; // Entre 0 y 1
-	private double porcentajeAdyacencia;
+	protected double porcentajeAdyacencia;
 
 	MatrizSimetrica matriz;
 
