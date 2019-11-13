@@ -11,7 +11,7 @@ public class Grafo {
 	private int cantidadDeNodos;
 	private MatrizSimetrica matrizDeAdayacencia;
 	private int cantidadDeAristas;
-	private int porcentajeAdyacencia;
+	private double porcentajeAdyacencia;
 	private int gradoMinimo;
 	private int gradoMaximo;
 	
@@ -95,13 +95,13 @@ public class Grafo {
 	}
 
 
-	public int getPorcentajeAdyacencia() {
+	public double getPorcentajeAdyacencia() {
 		return porcentajeAdyacencia;
 	}
 
 
-	public void setPorcentajeAdyacencia(int porcentajeAdyacencia) {
-		this.porcentajeAdyacencia = porcentajeAdyacencia;
+	public void setPorcentajeAdyacencia(double d) {
+		this.porcentajeAdyacencia = d;
 	}
 
 

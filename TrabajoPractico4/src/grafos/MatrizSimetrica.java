@@ -15,7 +15,7 @@ public class MatrizSimetrica {
 		vec = new int[cantidadDeElementos];
 		for(int i = 0; i < cantidadDeElementos; i++ ) {
 			vec[i] = 0;
-	}
+		}
 	}
 
 	public void cargarMatriz(ArrayList<Integer> elementos) {
@@ -64,12 +64,21 @@ public class MatrizSimetrica {
 		
 	}
 	
+	public void setValor(int indice, int valor) {
+		vec[indice] = valor;
+	}
+	
 	public void setValor(int fila, int columna, int valor) {
 		vec[getIndice(fila, columna)] = valor;
+	}
+	
+	public int getElemento(int indice) {
+		return vec[indice];
 	}
 	
 	public int getElemento(int fila, int columna){
 		return vec[getIndice(fila, columna)];
 	}
+
 	
 }

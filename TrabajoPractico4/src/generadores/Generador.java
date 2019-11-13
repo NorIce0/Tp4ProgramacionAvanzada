@@ -8,12 +8,13 @@ import grafos.MatrizSimetrica;
 
 public abstract class  Generador  {
 	
-	int cantidadDeNodos;
-	int gradoMin;
-	int gradoMax;
-	int cantArista;
-	double probabilidad; // Entre 0 y 1
-	double porcentajeAdyacencia;
+	private int cantidadDeNodos;
+	private int gradoMin;
+	private int gradoMax;
+	private int cantArista;
+	private double probabilidad; // Entre 0 y 1
+	private double porcentajeAdyacencia;
+
 	MatrizSimetrica matriz;
 
 	Grafo grafoResultante;
@@ -32,6 +33,56 @@ public abstract class  Generador  {
 
 	public abstract Grafo generar() throws IOException;
 
+	
+//	Getters y Setters
+	
+	public int getCantidadDeNodos() {
+		return cantidadDeNodos;
+	}
+
+	public void setCantidadDeNodos(int cantidadDeNodos) {
+		this.cantidadDeNodos = cantidadDeNodos;
+	}
+
+	public int getGradoMin() {
+		return gradoMin;
+	}
+
+	public void setGradoMin(int gradoMin) {
+		this.gradoMin = gradoMin;
+	}
+
+	public int getGradoMax() {
+		return gradoMax;
+	}
+
+	public void setGradoMax(int gradoMax) {
+		this.gradoMax = gradoMax;
+	}
+
+	public int getCantArista() {
+		return cantArista;
+	}
+
+	public void setCantArista(int cantArista) {
+		this.cantArista = cantArista;
+	}
+
+	public double getProbabilidad() {
+		return probabilidad;
+	}
+
+	public void setProbabilidad(double probabilidad) {
+		this.probabilidad = probabilidad;
+	}
+
+	public double getPorcentajeAdyacencia() {
+		return porcentajeAdyacencia;
+	}
+
+	public void setPorcentajeAdyacencia(double porcentajeAdyacencia) {
+		this.porcentajeAdyacencia = porcentajeAdyacencia;
+	}
 	 
 }
 

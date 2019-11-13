@@ -18,13 +18,13 @@ public class GeneradorPorProbabilidad extends Generador{
 		int aristas = 0;
 		int gradoMaximo = 0;
 		int gradoMinimo = 0;
-		int []grados = new int[cantidadDeNodos];
-		for(int i = 0; i < cantidadDeNodos; i++) {
+		int []grados = new int[getCantidadDeNodos()];
+		for(int i = 0; i < getCantidadDeNodos(); i++) {
 			grados[i] = 0;
 		}
 		
-		for(int i = 0; i < cantidadDeNodos; i++) {
-			for(int j = i + 1; j < cantidadDeNodos; j++) {
+		for(int i = 0; i < getCantidadDeNodos(); i++) {
+			for(int j = i + 1; j < getCantidadDeNodos(); j++) {
 				
 				if(Math.random() < probabilidad) {
 					aristas++;
@@ -40,8 +40,8 @@ public class GeneradorPorProbabilidad extends Generador{
 				
 			}
 		}
-		grafoResultante = new Grafo(cantidadDeNodos,  aristas, this.matriz);
-		grafoResultante.setPorcentajeAdyacencia((aristas/(cantidadDeNodos*(cantidadDeNodos-1)/2))*100);
+		grafoResultante = new Grafo(getCantidadDeNodos(),  aristas, this.matriz);
+		grafoResultante.setPorcentajeAdyacencia((aristas/(getCantidadDeNodos()*(getCantidadDeNodos()-1)/2))*100);
 		grafoResultante.setGradoMaximo(gradoMaximo);
 		grafoResultante.setGradoMinimo(gradoMinimo);
 		Archivo archivo = new Archivo("grafo.in");
