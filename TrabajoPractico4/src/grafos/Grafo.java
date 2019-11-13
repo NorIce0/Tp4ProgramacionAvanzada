@@ -23,7 +23,6 @@ public class Grafo {
 		this.gradoMaximo = 0;
 		this.porcentajeAdyacencia = 0;
 		this.matrizDeAdayacencia = new MatrizSimetrica(cantidadDeNodos);
-		matrizDeAdayacencia = new MatrizSimetrica(cantidadDeNodos);
 	}
 	
 	
@@ -32,7 +31,7 @@ public class Grafo {
 		this.cantidadDeAristas = cantidadDeAristas;
 		this.cantidadDeNodos = cantidadDeNodos;
 		this.matrizDeAdayacencia = new MatrizSimetrica(cantidadDeNodos);
-		this.matrizDeAdayacencia.cargarMatriz(matrizDeAdayacencia);
+		this.matrizDeAdayacencia.cargarMatriz(matrizDeAdacencia);
 		this.gradoMinimo = 0;
 		this.gradoMaximo = 0;
 		this.porcentajeAdyacencia = 0;

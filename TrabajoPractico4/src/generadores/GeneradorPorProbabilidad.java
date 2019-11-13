@@ -1,31 +1,17 @@
 package generadores;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import grafos.Grafo;
-import grafos.MatrizSimetrica;
 import utilitarios.Archivo;
 
 public class GeneradorPorProbabilidad extends Generador{
-	private double probabilidad; // Entre 0 y 1
-	private int cantidadDeNodos;
-	public ArrayList<Arista> listaDeAristas;
-	MatrizSimetrica matrizTemporal;
+	private double probabilidad; 
 	Grafo grafoResultante;
 	
-	public GeneradorPorProbabilidad(int cantidadDeNodos) {
-//		this.probabilidad = 1;
-//		this.cantidadDeNodos = cantidadDeNodos;
-//		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
-		super(cantidadDeNodos);
-	}
-	
 	public GeneradorPorProbabilidad(int cantidadDeNodos, double probabilidad) {
-//		this.probabilidad = probabilidad;
-//		this.cantidadDeNodos = cantidadDeNodos;
-//		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
-		super(cantidadDeNodos, probabilidad);
+		super(cantidadDeNodos, 100.0);
+		this.probabilidad = probabilidad;
 	}
 	
 	public Grafo generar() {
@@ -37,14 +23,12 @@ public class GeneradorPorProbabilidad extends Generador{
 			grados[i] = 0;
 		}
 		
-		listaDeAristas = new ArrayList<Arista>();
 		for(int i = 0; i < cantidadDeNodos; i++) {
 			for(int j = i + 1; j < cantidadDeNodos; j++) {
 				
 				if(Math.random() < probabilidad) {
 					aristas++;
-					matrizTemporal.setValor(i, j, 1);
-//					listaDeAristas.add(new Arista(i, j));
+					matriz.setValor(i, j, 1);
 					grados[i] += 1;
 					if(grados[i] > gradoMaximo) {
 						gradoMaximo = grados[i];
@@ -56,10 +40,10 @@ public class GeneradorPorProbabilidad extends Generador{
 				
 			}
 		}
-		grafoResultante = new Grafo(cantidadDeNodos,  aristas, matrizTemporal);
-//		grafoResultante.setPorcentajeAdyacencia((listaDeAristas.size()/(cantidadDeNodos*(cantidadDeNodos-1)/2))*100);
-//		grafoResultante.setGradoMaximo(gradoMaximo);
-//		grafoResultante.setGradoMinimo(gradoMinimo);
+		grafoResultante = new Grafo(cantidadDeNodos,  aristas, this.matriz);
+		grafoResultante.setPorcentajeAdyacencia((aristas/(cantidadDeNodos*(cantidadDeNodos-1)/2))*100);
+		grafoResultante.setGradoMaximo(gradoMaximo);
+		grafoResultante.setGradoMinimo(gradoMinimo);
 		Archivo archivo = new Archivo("grafo.in");
 		try {
 			archivo.guardarGrafo(grafoResultante);

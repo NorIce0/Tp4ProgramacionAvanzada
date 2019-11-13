@@ -1,13 +1,10 @@
 package utilitarios;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import generadores.Arista;
 import grafos.Grafo;
 
 public class Archivo {
@@ -22,14 +19,18 @@ public class Archivo {
 		sc.close();
 		return new Grafo(0,0);
 	}
-//	, ArrayList<Arista> listaDeAristas
+	
 	public void guardarGrafo(Grafo grafo) throws IOException {
 		FileWriter fw = new FileWriter(pathName);
 		fw.write(grafo.getCantidadDeNodos() + " " + grafo.getCantidadDeAristas() + " " +
 				grafo.getPorcentajeAdyacencia() + " " + grafo.getGradoMaximo() + " " + grafo.getGradoMinimo() + "\n");
-//		for(Arista aristaTemporal : listaDeAristas) {
-//			fw.write(aristaTemporal.getDesde() + " " + aristaTemporal.getHasta() + "\n");
-//		}
+		for(int i = 0; i < grafo.getCantidadDeNodos(); i++) {
+			for(int j = i + 1; j < grafo.getCantidadDeNodos(); j++) {
+				if( grafo.getMatrizDeAdayacencia().getElemento(i, j) == 1 ){
+					fw.write(j + " " + i + "\n");
+				}
+			}
+		}
 		fw.close();
 	}
 	

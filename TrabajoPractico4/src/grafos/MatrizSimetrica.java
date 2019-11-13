@@ -25,9 +25,7 @@ public class MatrizSimetrica {
 	}
 
 	public void cargarMatriz(MatrizSimetrica elementos) {
-		for(int i = 0; i < cantidadDeElementos; i++ ) {
-				this.vec[i] = elementos.vec[i];
-		}
+		this.vec = elementos.vec;
 	}
 	public int getFilas() {
 		return filas;
