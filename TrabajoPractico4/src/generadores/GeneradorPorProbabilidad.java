@@ -30,14 +30,27 @@ public class GeneradorPorProbabilidad extends Generador{
 					aristas++;
 					matriz.setValor(i, j, 1);
 					grados[i] += 1;
-					if(grados[i] > gradoMaximo) {
-						gradoMaximo = grados[i];
-					}
-					if(grados[i] < gradoMinimo){
-						gradoMinimo = grados[i];
-					}
+					grados[j] += 1;
 				}
 				
+			}
+		}
+		gradoMaximo = grados[0];
+		gradoMinimo = grados[0];
+		for (int i = 0; i < getCantidadDeNodos(); i++) {
+			for (int j = i + 1; j < getCantidadDeNodos(); j++) {
+					if (grados[i] > gradoMaximo) {
+						gradoMaximo = grados[i];
+					}
+					if (grados[j] > gradoMaximo) {
+						gradoMaximo = grados[j];
+					}
+					if (grados[i] < gradoMinimo) {
+						gradoMinimo = grados[i];
+					}
+					if (grados[j] < gradoMinimo) {
+						gradoMinimo = grados[j];
+					}
 			}
 		}
 		grafoResultante = new Grafo(getCantidadDeNodos(),  aristas, this.matriz);
