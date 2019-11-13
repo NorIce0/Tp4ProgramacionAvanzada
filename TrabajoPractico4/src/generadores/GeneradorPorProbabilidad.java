@@ -7,7 +7,7 @@ import grafos.Grafo;
 import grafos.MatrizSimetrica;
 import utilitarios.Archivo;
 
-public class GeneradorPorProbabilidad {
+public class GeneradorPorProbabilidad extends Generador{
 	private double probabilidad; // Entre 0 y 1
 	private int cantidadDeNodos;
 	public ArrayList<Arista> listaDeAristas;
@@ -15,15 +15,17 @@ public class GeneradorPorProbabilidad {
 	Grafo grafoResultante;
 	
 	public GeneradorPorProbabilidad(int cantidadDeNodos) {
-		this.probabilidad = 1;
-		this.cantidadDeNodos = cantidadDeNodos;
-		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
+//		this.probabilidad = 1;
+//		this.cantidadDeNodos = cantidadDeNodos;
+//		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
+		super(cantidadDeNodos);
 	}
 	
 	public GeneradorPorProbabilidad(int cantidadDeNodos, double probabilidad) {
-		this.probabilidad = probabilidad;
-		this.cantidadDeNodos = cantidadDeNodos;
-		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
+//		this.probabilidad = probabilidad;
+//		this.cantidadDeNodos = cantidadDeNodos;
+//		matrizTemporal = new MatrizSimetrica(cantidadDeNodos);
+		super(cantidadDeNodos, probabilidad);
 	}
 	
 	public Grafo generar() {
