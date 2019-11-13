@@ -9,7 +9,7 @@ public class aplicacion {
 	public static void main(String[] args) {
 		int n = 15;
 		GeneradorNPartitos gen1 = new GeneradorNPartitos(n, 4);
-		Grafo g1 = gen1.generar("grafo.in");
+		Grafo g1 = gen1.generar();
 //		g1.getMatrizDeAdayacencia().mostrarMatriz();
 	}
 }

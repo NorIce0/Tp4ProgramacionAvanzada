@@ -8,7 +8,7 @@ public class Analisis {
 	Generador gen;
 
 	
-	public void startAnalisisGrafosAleatorios(int cantidadDeNodos, double porcentajeAdyacencia, String pathIn,String pathOut){
-		gen = new GeneradorPorcentajeAdyacencia(cantidadDeNodos, porcentajeAdyacencia, pathIn);
+	public void startAnalisisGrafosAleatorios(int cantidadDeNodos, double porcentajeAdyacencia){
+		gen = new GeneradorPorcentajeAdyacencia(cantidadDeNodos, porcentajeAdyacencia);
 	}
 }

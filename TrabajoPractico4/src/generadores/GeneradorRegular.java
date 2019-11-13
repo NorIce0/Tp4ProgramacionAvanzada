@@ -14,37 +14,23 @@ public class GeneradorRegular extends Generador{
 	}
 
 	@Override
-	public Grafo generar() throws IOException {
-		if ((gradoMax % 2 != 0 && cantidadDeNodos % 2 != 0) || cantidadDeNodos <= gradoMax) {
-			return null;
-		}
-		
-		int listagrados[] = new int[cantidadDeNodos], grado = gradoMax;
-		int mitad = cantidadDeNodos / 2;
-		
-		if (grado % 2 == 1) {
-			for (int i = 0; i < mitad; i++) {
-				this.matriz.setValor(i, mitad + i, 1);
-				cantArista++;
-				listagrados[i]++;
-				listagrados[mitad + i]++;
+	public Grafo generar() {
+		int cantidadDeAristas = 0;
+		for(int i = 1; i < grado; i++) {
+			int j ;
+			for(j = 0; j < getCantidadDeNodos() - i; j++) {
+				matriz.setValor(j + i, j, 1);
+				cantidadDeAristas++;
 			}
 			grado -= 1;
 		}
 		
-		// circulo
-		if (grado > 1) { 
-			int salteo = 1;
-			while (grado <= this.gradoMax && grado>0) {
-				for (int i = 0; i < cantidadDeNodos; i++) {
-					this.matriz.setValor(i, (i + salteo) % cantidadDeNodos, 1);
-					cantArista++;
-					listagrados[i]++;
-					listagrados[(i+salteo) % cantidadDeNodos]++;	
-				}
-				salteo++;
-				grado-=2; 
-			}
+		Archivo archivo = new Archivo("grafo.in");
+		try {
+			archivo.guardarGrafo(grafoResultante);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No se puede abrir el archivo.");
 		}
 		
 			grafoResultante = new Grafo(getCantidadDeNodos(),  cantArista, this.matriz);

@@ -31,7 +31,7 @@ public abstract class  Generador  {
 		matriz = new MatrizSimetrica(cantidadDeNodos);
 	}
 
-	public abstract Grafo generar(String path) throws IOException;
+	public abstract Grafo generar() throws IOException;
 
 	
 //	Getters y Setters

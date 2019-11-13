@@ -14,7 +14,7 @@ public class GeneradorPorProbabilidad extends Generador{
 		this.probabilidad = probabilidad;
 	}
 	
-	public Grafo generar(String path) {
+	public Grafo generar() {
 		int aristas = 0;
 		int gradoMaximo = 0;
 		int gradoMinimo = 0;
@@ -57,7 +57,7 @@ public class GeneradorPorProbabilidad extends Generador{
 		grafoResultante.setPorcentajeAdyacencia((aristas/(getCantidadDeNodos()*(getCantidadDeNodos()-1)/2))*100);
 		grafoResultante.setGradoMaximo(gradoMaximo);
 		grafoResultante.setGradoMinimo(gradoMinimo);
-		Archivo archivo = new Archivo(path);
+		Archivo archivo = new Archivo("grafo.in");
 		try {
 			archivo.guardarGrafo(grafoResultante);
 		} catch (IOException e) {
