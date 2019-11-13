@@ -1,13 +1,15 @@
 package generadores;
 
 
+import java.io.IOException;
+
 import grafos.Grafo;
 
 public class aplicacion {
 	public static void main(String[] args) {
-		int n = 5;
-		GeneradorPorcentajeAdyacencia gen1 = new GeneradorPorcentajeAdyacencia(n, 55.9);
+		int n = 15;
+		GeneradorNPartitos gen1 = new GeneradorNPartitos(n, 4);
 		Grafo g1 = gen1.generar();
-		g1.getMatrizDeAdayacencia().mostrarMatriz();
+//		g1.getMatrizDeAdayacencia().mostrarMatriz();
 	}
 }

@@ -75,13 +75,14 @@ public class MatrizSimetrica {
 	public void setValor(int fila, int columna, int valor) {
 		vec[getIndice(fila, columna)] = valor;
 	}
-	
-	public int getElemento(int indice) {
-		return vec[indice];
-	}
+
 	
 	public int getElemento(int fila, int columna){
 		return vec[getIndice(fila, columna)];
+	}
+
+	public int getElemento(int indice) {
+		return vec[indice];
 	}
 
 	
