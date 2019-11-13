@@ -6,12 +6,10 @@ import java.io.IOException;
 import grafos.Grafo;
 
 public class aplicacion {
-	public static void main(String[] args) throws IOException {
-		int n = 5;
-		GeneradorRegular gen1 = new GeneradorRegular(n, 5);
+	public static void main(String[] args) {
+		int n = 15;
+		GeneradorNPartitos gen1 = new GeneradorNPartitos(n, 4);
 		Grafo g1 = gen1.generar();
-		if (gen1 == null)
-			return;
-		g1.getMatrizDeAdayacencia().mostrarMatriz();
+//		g1.getMatrizDeAdayacencia().mostrarMatriz();
 	}
 }

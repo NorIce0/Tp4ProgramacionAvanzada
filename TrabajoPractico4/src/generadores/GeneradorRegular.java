@@ -4,13 +4,16 @@ import java.io.IOException;
 
 import utilitarios.Archivo;
 import grafos.Grafo;
+import utilitarios.Archivo;
 
 public class GeneradorRegular extends Generador{
 
-	public GeneradorRegular(int cantidadDeNodos,int grado) {
+	int grado;
+	public GeneradorRegular(int cantidadDeNodos, int grado) {
 		super(cantidadDeNodos);
 		this.setGradoMin(grado);
 		this.setGradoMax(grado);
+		this.grado = grado;
 	}
 
 	@Override
@@ -31,6 +34,10 @@ public class GeneradorRegular extends Generador{
 			}
 			grado -= 1;
 		}
+		grafoResultante = new Grafo(getCantidadDeNodos(),  cantidadDeAristas, this.matriz);
+		grafoResultante.setPorcentajeAdyacencia((cantidadDeAristas/(getCantidadDeNodos()*(getCantidadDeNodos()-1)/2))*100);
+		grafoResultante.setGradoMaximo(getGradoMax());
+		grafoResultante.setGradoMinimo(getGradoMin());
 		
 		// circulo
 		if (grado > 1) { 

@@ -14,8 +14,9 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 
 	@Override
 	public Grafo generar() {
-		int aristas = (int) Math.ceil((getCantidadDeNodos() * (getCantidadDeNodos() - 1) / 2) * (getPorcentajeAdyacencia() / 100));
-		int cantidadMaxima = getCantidadDeNodos() *(getCantidadDeNodos()-1)/2;
+		int aristas = (int) Math
+				.ceil((getCantidadDeNodos() * (getCantidadDeNodos() - 1) / 2) * (getPorcentajeAdyacencia() / 100));
+		int cantidadMaxima = getCantidadDeNodos() * (getCantidadDeNodos() - 1) / 2;
 		int gradoMaximo = 0;
 		int gradoMinimo = 0;
 		int temporal;
@@ -26,30 +27,36 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 			grados[i] = 0;
 		}
 		while (z < aristas) {
-			temporal = ((int)Math.ceil((Math.random() * Integer.MAX_VALUE)) % (cantidadMaxima - 1));
+			temporal = ((int) Math.ceil((Math.random() * Integer.MAX_VALUE)) % (cantidadMaxima - 1));
 			System.out.println(temporal);
-			if ( this.matriz.getElemento(temporal) == 0) {
+			if (this.matriz.getElemento(temporal) == 0) {
 				this.matriz.setValor(temporal, 1);
 				z++;
 			}
 		}
-		for(int i = 0; i < nodos; i++) {
-			for(int j = i + 1; j < nodos; j++) {
-				if(this.matriz.getElemento(i, j) == 1) {
-					grados[i]++;
-					grados[j]++;
-					if(grados[i] > gradoMaximo) {
-						gradoMaximo = grados[i];
-					}
-					if(grados[j] > gradoMaximo) {
-						gradoMaximo = grados[j];
-					}
-					if(grados[i] < gradoMinimo) {
-						gradoMinimo = grados[i];
-					}
-					if(grados[j] < gradoMinimo) {
-						gradoMinimo = grados[j];
-					}
+
+		for (int i = 0; i < getCantidadDeNodos(); i++) {
+			for (int j = i + 1; j < getCantidadDeNodos(); j++) {
+
+				grados[i]++;
+				grados[j]++;
+			}
+		}
+		gradoMaximo = grados[0];
+		gradoMinimo = grados[0];
+		for (int i = 0; i < getCantidadDeNodos(); i++) {
+			for (int j = i + 1; j < getCantidadDeNodos(); j++) {
+				if (grados[i] > gradoMaximo) {
+					gradoMaximo = grados[i];
+				}
+				if (grados[j] > gradoMaximo) {
+					gradoMaximo = grados[j];
+				}
+				if (grados[i] < gradoMinimo) {
+					gradoMinimo = grados[i];
+				}
+				if (grados[j] < gradoMinimo) {
+					gradoMinimo = grados[j];
 				}
 			}
 		}
@@ -57,7 +64,7 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 		grafoResultante.setPorcentajeAdyacencia(getPorcentajeAdyacencia());
 		grafoResultante.setGradoMaximo(gradoMaximo);
 		grafoResultante.setGradoMinimo(gradoMinimo);
-		
+
 		Archivo archivo = new Archivo("grafo.in");
 		try {
 			archivo.guardarGrafo(grafoResultante);
