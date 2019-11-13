@@ -16,7 +16,7 @@ public class GeneradorRegular extends Generador{
 	}
 
 	@Override
-	public Grafo generar() {
+	public Grafo generar(String path) {
 		int cantidadDeAristas = 0;
 		for(int i = 1; i < grado; i++) {
 			int j ;
@@ -31,7 +31,7 @@ public class GeneradorRegular extends Generador{
 		grafoResultante.setGradoMaximo(getGradoMax());
 		grafoResultante.setGradoMinimo(getGradoMin());
 		
-		Archivo archivo = new Archivo("grafo.in");
+		Archivo archivo = new Archivo(path);
 		try {
 			archivo.guardarGrafo(grafoResultante);
 		} catch (IOException e) {

@@ -13,7 +13,7 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 	}
 
 	@Override
-	public Grafo generar() {
+	public Grafo generar(String path) {
 		int aristas = (int) Math
 				.ceil((getCantidadDeNodos() * (getCantidadDeNodos() - 1) / 2) * (getPorcentajeAdyacencia() / 100));
 		int cantidadMaxima = getCantidadDeNodos() * (getCantidadDeNodos() - 1) / 2;
@@ -65,7 +65,7 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 		grafoResultante.setGradoMaximo(gradoMaximo);
 		grafoResultante.setGradoMinimo(gradoMinimo);
 
-		Archivo archivo = new Archivo("grafo.in");
+		Archivo archivo = new Archivo(path);
 		try {
 			archivo.guardarGrafo(grafoResultante);
 		} catch (IOException e) {

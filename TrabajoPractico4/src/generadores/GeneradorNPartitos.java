@@ -15,7 +15,7 @@ public class GeneradorNPartitos extends Generador {
 	}
 
 	@Override
-	public Grafo generar() {
+	public Grafo generar(String path) {
 		int aristas = 0;
 		int gradoMaximo = 0;
 		int gradoMinimo = getCantArista();
@@ -62,7 +62,7 @@ public class GeneradorNPartitos extends Generador {
 		grafoResultante.setGradoMinimo(gradoMinimo);
 
 		try {
-			Archivo archivo = new Archivo("grafo.in");
+			Archivo archivo = new Archivo(path);
 			archivo.guardarGrafo(grafoResultante);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
