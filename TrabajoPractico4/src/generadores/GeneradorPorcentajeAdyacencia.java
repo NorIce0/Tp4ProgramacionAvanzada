@@ -29,7 +29,7 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 		
 		for(int i = 0; i < aristas; i++) {
 			do {
-			temporal = (int) Math.ceil(Math.random() * (cantidadMaxima - 1));
+			temporal = (int) Math.round(Math.random() * (cantidadMaxima - 1));
 			}while(this.matriz.getElemento(temporal) != 0);
 				this.matriz.setValor(temporal, 1);
 		}

@@ -77,6 +77,7 @@ public class Coloreo {
 	}
 
 	public int sinOrden() {
+		this.ordenarAleatoriamente();
 		return this.pintarGrafo();
 	}
 	
@@ -86,23 +87,25 @@ public class Coloreo {
 	}
 
 	public int coloreoWellshPowell() {
+		this.ordenarAleatoriamente();
 		this.ordenarDescententemente();
 		return this.pintarGrafo();
 	}
 
 	public int coloreoMatula() {
+		this.ordenarAleatoriamente();
 		this.ordenarAscendentemente();
 		return this.pintarGrafo();
 	}
 
 	public void ordenarAleatoriamente() {
+		NodoColor aux = new NodoColor(0,0);
 		for (int i = 0; i < cantNodos; i++) {
-			int posA = (int) Math.floor((Math.random() * this.cantNodos));
-			int posB = (int) Math.floor((Math.random() * this.cantNodos));
-
-			NodoColor aux = nodosConColor.get(posB);
-			nodosConColor.set(posB, nodosConColor.get(posA));
-			this.nodosConColor.set(posA, aux);
+			NodoColor posA = nodosConColor.get((int) Math.floor((Math.random() * this.cantNodos)));
+			NodoColor posB = nodosConColor.get((int) Math.floor((Math.random() * this.cantNodos)));
+			aux.setGrado(posB.getGrado());
+			posB.setGrado(posA.getGrado());
+			posA.setGrado(aux.getGrado());
 		}
 	}
 
