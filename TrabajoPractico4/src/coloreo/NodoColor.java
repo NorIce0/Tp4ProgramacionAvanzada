@@ -6,9 +6,15 @@ public class NodoColor implements Comparable<NodoColor>{
 	private int grado;
 	private int color;
 	
-	public NodoColor(int n, int g) {
-		nro=n;
-		grado=g;
+	public NodoColor(int nro, int grado) {
+		this.nro = nro;
+		this.grado = grado;
+	}
+	
+	public NodoColor(int nro, int grado, int color) {
+		this.nro = nro;
+		this.grado = grado;
+		this.color = color;
 	}
 
 	@Override

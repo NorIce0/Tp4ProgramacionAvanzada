@@ -3,7 +3,8 @@ package grafos;
 import grafos.MatrizSimetrica;
 
 public class GrafoNDNP extends MatrizSimetrica{
-
+	
+	private int []grados;
 	private int gradoMin;
 	private int gradoMax;
 	private int cantAristas;
@@ -22,8 +23,19 @@ public class GrafoNDNP extends MatrizSimetrica{
 		this.gradoMax = gradoMax;
 		this.cantAristas = cantArista;
 		this.porcentaje = porcentaje;
+		this.grados = new int [cantDeNodos];
 	}
 
+	
+	public GrafoNDNP(Grafo g) {
+		super(g.getCantidadDeNodos());
+		super.cargarMatriz(g.getMatrizDeAdayacencia());
+		this.gradoMax = g.getGradoMaximo();
+		this.gradoMin = g.getGradoMinimo();
+		this.cantAristas = g.getCantidadDeAristas();
+		this.porcentaje = g.getPorcentajeAdyacencia();
+		this.grados = g.getGrados();
+	}
 
 
 	public int getGradoMin() {
@@ -72,5 +84,12 @@ public class GrafoNDNP extends MatrizSimetrica{
 		this.porcentaje = porcentaje;
 	}
 	
+	public int[] getGrado(){
+		return grados;
+	}
+	
+	public void setGrado(int []grados){
+		setGrado(grados);;
+	}
 
 }

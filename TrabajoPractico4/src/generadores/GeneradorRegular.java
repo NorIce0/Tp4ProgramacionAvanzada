@@ -24,28 +24,25 @@ public class GeneradorRegular extends Generador {
 			}
 			grado -= 1;
 		}
-
-		Archivo archivo = new Archivo("grafo.in");
-		try {
-			archivo.guardarGrafo(grafoResultante);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("No se puede abrir el archivo.");
+		int []grados = new int[cantidadDeNodos];
+		for(int i = 0; i < cantidadDeNodos; i++) {
+			grados[i] = grado;
 		}
 
-		grafoResultante = new Grafo(getCantidadDeNodos(), cantArista, this.matriz);
-		grafoResultante.setPorcentajeAdyacencia(
+		grafo = new Grafo(getCantidadDeNodos(), cantArista, this.matriz);
+		grafo.setPorcentajeAdyacencia(
 				(int) ((float) cantArista / (cantidadDeNodos * (cantidadDeNodos - 1) / 2) * 100));
-		grafoResultante.setGradoMaximo(this.getGradoMax());
-		grafoResultante.setGradoMinimo(this.getGradoMin());
+		grafo.setGradoMaximo(this.getGradoMax());
+		grafo.setGradoMinimo(this.getGradoMin());
+		grafo.setGrados(grados);
 		Archivo file = new Archivo(path);
 		try {
-			file.guardarGrafo(grafoResultante);
+			file.guardarGrafo(grafo);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("No se puede abrir el archivo.");
 		}
-		return grafoResultante;
+		return grafo;
 
 	}
 }

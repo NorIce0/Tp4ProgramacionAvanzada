@@ -11,7 +11,7 @@ public class MatrizSimetrica {
 	public MatrizSimetrica(int filas) {
 
 		this.filas = filas;
-		this.cantidadDeElementos = (filas * (filas-1))/2;
+		this.cantidadDeElementos = (filas * (filas - 1) ) /2;
 		vec = new int[cantidadDeElementos];
 		for(int i = 0; i < cantidadDeElementos; i++ ) {
 			vec[i] = 0;

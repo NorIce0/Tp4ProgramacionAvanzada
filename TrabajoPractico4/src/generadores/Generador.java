@@ -17,7 +17,7 @@ public abstract class  Generador  {
 
 	MatrizSimetrica matriz;
 
-	Grafo grafoResultante;
+	Grafo grafo;
 	
 	public Generador(int cantidadDeNodos, double porcentaje){
 		this.cantidadDeNodos = cantidadDeNodos;

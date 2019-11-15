@@ -9,7 +9,7 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 
 	public GeneradorPorcentajeAdyacencia(int cantidadDeNodos, double porcentajeAdyacencia) {
 		super(cantidadDeNodos, porcentajeAdyacencia);
-
+		setPorcentajeAdyacencia(porcentajeAdyacencia);
 	}
 
 	@Override
@@ -22,17 +22,16 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 		int temporal;
 		int z = 0;
 		int[] grados = new int[getCantidadDeNodos()];
-		int nodos = getCantidadDeNodos();
+		
 		for (int i = 0; i < getCantidadDeNodos(); i++) {
 			grados[i] = 0;
 		}
-		while (z < aristas) {
-			temporal = ((int) Math.ceil((Math.random() * Integer.MAX_VALUE)) % (cantidadMaxima - 1));
-			System.out.println(temporal);
-			if (this.matriz.getElemento(temporal) == 0) {
+		
+		for(int i = 0; i < aristas; i++) {
+			do {
+			temporal = (int) Math.ceil(Math.random() * (cantidadMaxima - 1));
+			}while(this.matriz.getElemento(temporal) != 0);
 				this.matriz.setValor(temporal, 1);
-				z++;
-			}
 		}
 
 		for (int i = 0; i < getCantidadDeNodos(); i++) {
@@ -42,8 +41,10 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 				grados[j]++;
 			}
 		}
+		
 		gradoMaximo = grados[0];
 		gradoMinimo = grados[0];
+		
 		for (int i = 0; i < getCantidadDeNodos(); i++) {
 			for (int j = i + 1; j < getCantidadDeNodos(); j++) {
 				if (grados[i] > gradoMaximo) {
@@ -60,19 +61,20 @@ public class GeneradorPorcentajeAdyacencia extends Generador {
 				}
 			}
 		}
-		grafoResultante = new Grafo(getCantidadDeNodos(), aristas, this.matriz);
-		grafoResultante.setPorcentajeAdyacencia(getPorcentajeAdyacencia());
-		grafoResultante.setGradoMaximo(gradoMaximo);
-		grafoResultante.setGradoMinimo(gradoMinimo);
+		
+		grafo = new Grafo(getCantidadDeNodos(), aristas, this.matriz);
+		grafo.setPorcentajeAdyacencia(getPorcentajeAdyacencia());
+		grafo.setGradoMaximo(gradoMaximo);
+		grafo.setGradoMinimo(gradoMinimo);
 
 		Archivo archivo = new Archivo(path);
 		try {
-			archivo.guardarGrafo(grafoResultante);
+			archivo.guardarGrafo(grafo);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("No se puede abrir el archivo.");
 		}
-		return grafoResultante;
+		return grafo;
 	}
 
 }

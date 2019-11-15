@@ -55,15 +55,15 @@ public class GeneradorNPartitos extends Generador {
 		}
 		matriz.mostrarMatriz();
 
-		grafoResultante = new Grafo(getCantidadDeNodos(), aristas, this.matriz);
-		grafoResultante
+		grafo = new Grafo(getCantidadDeNodos(), aristas, this.matriz);
+		grafo
 				.setPorcentajeAdyacencia((aristas / (getCantidadDeNodos() * (getCantidadDeNodos() - 1)) / 2) * 100);
-		grafoResultante.setGradoMaximo(gradoMaximo);
-		grafoResultante.setGradoMinimo(gradoMinimo);
+		grafo.setGradoMaximo(gradoMaximo);
+		grafo.setGradoMinimo(gradoMinimo);
 
 		try {
 			Archivo archivo = new Archivo(path);
-			archivo.guardarGrafo(grafoResultante);
+			archivo.guardarGrafo(grafo);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("No se puede abrir el archivo.");

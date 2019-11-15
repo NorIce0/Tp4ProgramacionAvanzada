@@ -8,6 +8,7 @@ import generadores.Arista;
 
 public class Grafo {
 	
+	private int []grados;
 	private int cantidadDeNodos;
 	private MatrizSimetrica matrizDeAdayacencia;
 	private int cantidadDeAristas;
@@ -16,7 +17,7 @@ public class Grafo {
 	private int gradoMaximo;
 	
 	public Grafo(int cantidadDeNodos, int cantidadDeAristas) {
-		
+		this.grados = new int[cantidadDeNodos]; 
 		this.cantidadDeAristas = cantidadDeAristas;
 		this.cantidadDeNodos = cantidadDeNodos;
 		this.gradoMinimo = 0;
@@ -27,7 +28,8 @@ public class Grafo {
 	
 	
 	public Grafo(int cantidadDeNodos, int cantidadDeAristas, MatrizSimetrica matrizDeAdacencia) {
-		
+
+		this.grados = new int[cantidadDeNodos]; 
 		this.cantidadDeAristas = cantidadDeAristas;
 		this.cantidadDeNodos = cantidadDeNodos;
 		this.matrizDeAdayacencia = new MatrizSimetrica(cantidadDeNodos);
@@ -39,7 +41,8 @@ public class Grafo {
 	}
 	
 	public Grafo(int cantidadDeNodos, int cantidadDeAristas, ArrayList<Arista> listaDeAristas) {
-		
+
+		this.grados = new int[cantidadDeNodos]; 
 		this.cantidadDeAristas = cantidadDeAristas;
 		this.cantidadDeNodos = cantidadDeNodos;
 		this.cargarListaDeAristas(listaDeAristas);
@@ -51,6 +54,16 @@ public class Grafo {
 	}
 	
 	
+	public int[] getGrados() {
+		return grados;
+	}
+
+
+	public void setGrados(int[] grados) {
+		this.grados = grados;
+	}
+
+
 	public void cargarListaDeAristas(ArrayList<Arista> listaDeAristas) {
 		System.out.println(listaDeAristas.get(6).getDesde() + " " + listaDeAristas.get(6).getHasta());
 		for(Arista aristaActual : listaDeAristas) {
