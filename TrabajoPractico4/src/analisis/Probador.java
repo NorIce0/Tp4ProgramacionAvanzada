@@ -17,7 +17,7 @@ public class Probador {
 		//Nodos adyacentes diferente color
 		for(int i=0; i<cantNodos-1;i++) 
 			for (int j = i+1; j < cantNodos; j++) {
-				if(grafo.getValor(i, j) == 1|| nodosColoreados[i]==nodosColoreados[j])
+				if(grafo.getValor(i, j) == 1 && nodosColoreados[i]==nodosColoreados[j])
 				           return false;
 			}
 		

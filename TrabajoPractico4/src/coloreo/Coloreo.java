@@ -42,72 +42,66 @@ public class Coloreo {
 	}
 
 	public int pintarGrafo() {
-		int colorAct = 1;
-//		 instancio el array de colores
-		int[] colores = new int[cantNodos];
-		colores[0] = colorAct;
+		
+		int setColor = 1; //El color con que arrancamos a pintar
+		
 		for (int i = 0; i < cantNodos; i++) {
+//			 instancio el array de colores
+			int[] colores = new int[cantNodos];
+			
+			int contadorColores = 1; //cuenta la cantidad de nodos que colorie en un iteracion para un color.
 //			si el nodo actual no tiene color
 			int nodoActual = nodosConColor.get(i).getNro();
-			if (nodosConColor.get(i).getColor() == 0) {
+			int colorActual = nodosConColor.get(i).getColor();
+			if ( colorActual == 0) { //si nodo actual no esta coloreado
+				colores[0] = nodoActual; //lo agrego a la lista de nodos coloreados
+				nodosConColor.get(i).setColor(setColor); //seteo su color
 
-				int colorTemporal = 1;
-//				mientras color temporal este definido y sea adyacente al nodo actual, lo cambio
-				while (colorTemporal <= colorAct
-						&& esColorAdyacente(colorTemporal, nodosConColor.get(i).getNro(), grafo))
-					colorTemporal++;//
-//				 si el color temporal es menor al color actual, no es adyacente al nodo actual, asi que pinto el nodo con este color
-				if (colorTemporal <= colorAct) {
-					nodosConColor.get(i).setColor(colorTemporal);
-				} else {
-//					como todos los colores definidos son adyacentes creo uno nuevo y se lo pongo al nodo actual
-					colores[colorAct] = ++colorAct;
-
-					nodosConColor.get(i).setColor(colorAct);
+				for(int j = i + 1; j < cantNodos;j++) { //viendo solo la triangular superior, hasta cantidad de nodos
+					int nodoJ = nodosConColor.get(j).getNro(); 
+					int colorJ = nodosConColor.get(j).getColor();
+					if(nodoActual != nodoJ && !esAdyacente(colores, contadorColores, nodoJ) && colorJ == 0) { //si ese nodo es distinto de mi nodo actual Y no es adyacente Y no tiene color
+						nodosConColor.get(j).setColor(setColor); //lo pinto
+						colores[contadorColores] = nodoJ; //lo agrego a la lista de nodos coloreados
+						contadorColores++; //
+					}
 				}
+				setColor++;//Cambio al siguiente color
 			}
+			
+			
+			
 		}
+		return setColor-1; //devuelvo cantidad de colores 
 		
-		System.out.println();
-		for(int i = 0; i < cantNodos; i++) {
-			System.out.println(nodosConColor.get(i).getColor() + " " + i + " " + nodosConColor.get(i).getNro() );
-		}
-		
-		return colorAct;// devuelvo el total de colores
+//		System.out.println();
+//		for(int i = 0; i < cantNodos; i++) {
+//			System.out.println(nodosConColor.get(i).getColor() + " " + i + " " + nodosConColor.get(i).getNro() );
+//		}
 	}
 
 	public int sinOrden() {
-		this.ordenarAleatoriamente();
+		Collections.shuffle(nodosConColor);
 		return this.pintarGrafo();
 	}
 	
 	public int coloreoAleatorio() {
-		this.ordenarAleatoriamente();
+		Collections.shuffle(nodosConColor);
 		return this.pintarGrafo();
 	}
 
 	public int coloreoWellshPowell() {
-		this.ordenarAleatoriamente();
+		Collections.shuffle(nodosConColor);
 		this.ordenarDescententemente();
 		return this.pintarGrafo();
 	}
 
 	public int coloreoMatula() {
-		this.ordenarAleatoriamente();
+		Collections.shuffle(nodosConColor);
 		this.ordenarAscendentemente();
 		return this.pintarGrafo();
 	}
 
-	public void ordenarAleatoriamente() {
-		NodoColor aux = new NodoColor(0,0);
-		for (int i = 0; i < cantNodos; i++) {
-			NodoColor posA = nodosConColor.get((int) Math.floor((Math.random() * this.cantNodos)));
-			NodoColor posB = nodosConColor.get((int) Math.floor((Math.random() * this.cantNodos)));
-			aux.setGrado(posB.getGrado());
-			posB.setGrado(posA.getGrado());
-			posA.setGrado(aux.getGrado());
-		}
-	}
 
 	public void ordenarDescententemente() {
 
@@ -115,9 +109,7 @@ public class Coloreo {
 
 			@Override
 			public int compare(NodoColor nodo1, NodoColor nodo2) {
-				if(nodo2.getGrado() - nodo1.getGrado() != 0)
-					return nodo2.getGrado() - nodo1.getGrado();
-				return nodo2.getNro() - nodo1.getNro();
+				return nodo2.getGrado() - nodo1.getGrado();
 			}
 
 		});
@@ -143,9 +135,7 @@ public class Coloreo {
 
 			@Override
 			public int compare(NodoColor nodo1, NodoColor nodo2) {
-				if(nodo1.getGrado() - nodo2.getGrado() != 0)
-					return nodo1.getGrado() - nodo2.getGrado();
-				return nodo1.getNro() - nodo2.getNro();
+				return nodo1.getGrado() - nodo2.getGrado();
 			}
 
 		});
@@ -161,15 +151,27 @@ public class Coloreo {
 //		}
 	}
 
-	private boolean esColorAdyacente(int color, int nodoEvaluado, GrafoNDNP adyacencias) {
-		for (int i = 0; i < cantNodos; i++) {
-			if (nodosConColor.get(i).getNro() != nodoEvaluado && ((adyacencias.getElemento(nodoEvaluado, nodosConColor.get(i).getNro()) == 1 ||  ( adyacencias.getElemento(nodosConColor.get(i).getNro(), nodoEvaluado) == 1 )))) {
-				if (color == nodosConColor.get(i).getColor())
-					return true;
-			}
+//	private boolean esColorAdyacente(int color, int nodoEvaluado, GrafoNDNP adyacencias) {
+//		for (int i = 0; i < cantNodos; i++) {
+//			if (nodosConColor.get(i).getNro() != nodoEvaluado && ((adyacencias.getElemento(nodoEvaluado, nodosConColor.get(i).getNro()) == 1 ||  ( adyacencias.getElemento(nodosConColor.get(i).getNro(), nodoEvaluado) == 1 )))) {
+//				if (color == nodosConColor.get(i).getColor())
+//					return true;
+//			}
+//		}
+//		return false;
+//	}
+	
+	private boolean esAdyacente(int[] colores, int limite, int nodoJ) {
+		boolean res = false;
+		int nodoVisto = 0;
+		while(nodoVisto < limite) {
+			if (grafo.getValor(nodoJ, colores[nodoVisto])==1)
+				res = true;
+			nodoVisto++;
 		}
-		return false;
+		return res;
 	}
+	
 
 	public GrafoNDNP getGrafo() {
 		return grafo;
