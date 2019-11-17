@@ -4,18 +4,33 @@ package generadores;
 import java.io.IOException;
 
 import analisis.Analisis;
+import analisis.Probador;
+import coloreo.Coloreo;
 import grafos.Grafo;
+import grafos.GrafoNDNP;
 import utilitarios.Archivo;
 
 public class aplicacion {
 	public static void main(String[] args) throws IOException {
-		int n = 600;
+		int n = 6;
 		
-		double porcentaje;
+		double porcentaje = 100.0;
 		
-		porcentaje = 40.0;
-		Analisis analizador1 = new Analisis();
-		analizador1.startAnalisisGrafos(n, porcentaje, 10);
+		Generador gen = new GeneradorPorcentajeAdyacencia(n, porcentaje);
+		
+		Grafo grafo = gen.generar("grafo.in");
+		grafo.getMatrizDeAdayacencia().mostrarMatriz();
+		GrafoNDNP g1 = new GrafoNDNP(grafo);
+		Coloreo coloreador = new Coloreo(g1);
+		coloreador.coloreoWellshPowell();
+		if(Probador.programaProbador(coloreador))
+			System.out.println("Funciono Bien");
+		else
+			System.out.println("\nNo anda");
+		
+//		porcentaje = 40.0;
+//		Analisis analizador1 = new Analisis();
+//		analizador1.startAnalisisGrafos(n, porcentaje, 10);
 		
 		
 //		porcentaje = 60.0;

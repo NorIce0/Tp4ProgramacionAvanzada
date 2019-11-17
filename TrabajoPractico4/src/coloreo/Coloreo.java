@@ -172,7 +172,6 @@ public class Coloreo {
 		return res;
 	}
 	
-
 	public GrafoNDNP getGrafo() {
 		return grafo;
 	}
@@ -181,4 +180,12 @@ public class Coloreo {
 		this.grafo = grafo;
 	}
 
+	public ArrayList<NodoColor> getNodosConColor() {
+		return nodosConColor;
+	}
+
+	public void setNodosConColor(ArrayList<NodoColor> nodosConColor) {
+		this.nodosConColor = nodosConColor;
+	}
+	
 }
