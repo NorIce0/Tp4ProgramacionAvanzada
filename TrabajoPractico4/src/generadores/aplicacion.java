@@ -17,6 +17,9 @@ public class aplicacion {
 //		Analisis analizador1 = new Analisis();
 //		analizador1.startAnalisisGrafos(n, porcentaje, 10000);
 		
+		porcentaje = 40.0;
+		Analisis analizador1 = new Analisis();
+		analizador1.startAnalisisGrafos(n, porcentaje, 10);
 		
 //		porcentaje = 60.0;
 //		Analisis analizador2 = new Analisis();
